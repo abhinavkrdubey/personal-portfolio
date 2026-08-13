@@ -1,0 +1,552 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const services = [
+  {
+    name: "JupyterLab",
+    category: "Development",
+    description: "Centralized Python and data-science experimentation environment.",
+    status: "Running"
+  },
+  {
+    name: "MLflow",
+    category: "MLOps",
+    description: "Experiment tracking, metrics, artifacts and model lifecycle management.",
+    status: "Running"
+  },
+  {
+    name: "Ollama",
+    category: "AI",
+    description: "Local language-model inference and experimentation.",
+    status: "Running"
+  },
+  {
+    name: "Immich",
+    category: "Storage",
+    description: "Self-hosted phone photo and video backup platform.",
+    status: "Running"
+  },
+  {
+    name: "Nextcloud",
+    category: "Cloud",
+    description: "Personal file sync, sharing and private cloud storage.",
+    status: "Running"
+  },
+  {
+    name: "Grafana",
+    category: "Monitoring",
+    description: "System, Docker and GPU observability dashboards.",
+    status: "Running"
+  },
+  {
+    name: "Prometheus",
+    category: "Monitoring",
+    description: "Time-series metrics collection and monitoring backend.",
+    status: "Running"
+  },
+  {
+    name: "Caddy",
+    category: "Hosting",
+    description: "Reverse proxy and routing layer for hosted applications.",
+    status: "Running"
+  }
+];
+
+const specs = [
+  ["OS", "Ubuntu Server"],
+  ["Compute", "Intel Core i5 · 8 logical CPUs"],
+  ["Memory", "~15 GB RAM"],
+  ["GPU", "NVIDIA GTX 1050 Ti · 4 GB"],
+  ["System Storage", "128 GB SSD"],
+  ["Data Storage", "1 TB HDD"],
+  ["Containers", "Docker + Compose"],
+  ["Observability", "Prometheus + Grafana"]
+];
+---
+
+<BaseLayout
+  title="Homelab — Abhinav"
+  description="My self-hosted infrastructure for machine learning, AI, storage, monitoring and application hosting."
+>
+  <section class="lab-hero">
+    <div>
+      <span class="eyebrow">SELF-HOSTED INFRASTRUCTURE</span>
+
+      <h1>
+        My private
+        <span>AI & ML platform.</span>
+      </h1>
+
+      <p>
+        A self-hosted environment built to learn how models, APIs,
+        monitoring, storage and infrastructure work together beyond
+        the notebook.
+      </p>
+    </div>
+
+    <div class="hero-status">
+      <span class="pulse"></span>
+      <strong>Homelab operational</strong>
+    </div>
+  </section>
+
+  <section class="architecture">
+    <div class="architecture-title">
+      <span class="eyebrow">ARCHITECTURE</span>
+      <h2>From hardware to application.</h2>
+    </div>
+
+    <div class="architecture-flow">
+      <div class="architecture-node public">
+        <span>01</span>
+        <strong>Clients</strong>
+        <small>Mac · Phone · Browser</small>
+      </div>
+
+      <div class="line">→</div>
+
+      <div class="architecture-node">
+        <span>02</span>
+        <strong>Caddy</strong>
+        <small>Reverse Proxy</small>
+      </div>
+
+      <div class="line">→</div>
+
+      <div class="architecture-node main">
+        <span>03</span>
+        <strong>Docker</strong>
+        <small>Application Platform</small>
+      </div>
+
+      <div class="line">→</div>
+
+      <div class="architecture-node">
+        <span>04</span>
+        <strong>Ubuntu</strong>
+        <small>Host OS</small>
+      </div>
+
+      <div class="line">→</div>
+
+      <div class="architecture-node">
+        <span>05</span>
+        <strong>Predator</strong>
+        <small>Physical Server</small>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <span>Jupyter</span>
+      <span>MLflow</span>
+      <span>Ollama</span>
+      <span>Immich</span>
+      <span>Nextcloud</span>
+      <span>Grafana</span>
+    </div>
+  </section>
+
+  <section class="lab-content">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">SERVICES</span>
+        <h2>What runs on it.</h2>
+      </div>
+
+      <span class="service-count">{services.length} services shown</span>
+    </div>
+
+    <div class="services-grid">
+      {
+        services.map((service) => (
+          <article class="service-card">
+            <div class="service-top">
+              <span class="service-category">{service.category}</span>
+
+              <span class="status">
+                <i></i>
+                {service.status}
+              </span>
+            </div>
+
+            <h3>{service.name}</h3>
+            <p>{service.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="spec-section">
+    <div>
+      <span class="eyebrow">HARDWARE</span>
+      <h2>Small machine.<br />Serious playground.</h2>
+
+      <p>
+        The constraint is part of the point. Limited hardware forces
+        deliberate decisions around services, resource usage and architecture.
+      </p>
+    </div>
+
+    <div class="spec-list">
+      {
+        specs.map(([name, value]) => (
+          <div>
+            <span>{name}</span>
+            <strong>{value}</strong>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="principles">
+    <article>
+      <span>01</span>
+      <h3>Reproducible</h3>
+      <p>Services are containerized and configuration is treated as infrastructure.</p>
+    </article>
+
+    <article>
+      <span>02</span>
+      <h3>Observable</h3>
+      <p>CPU, memory, disks, Docker containers and GPU metrics are monitored.</p>
+    </article>
+
+    <article>
+      <span>03</span>
+      <h3>Useful</h3>
+      <p>The platform runs actual workloads instead of existing only as a demo environment.</p>
+    </article>
+
+    <article>
+      <span>04</span>
+      <h3>Expandable</h3>
+      <p>Designed to grow into hosting, AI workloads and home automation over time.</p>
+    </article>
+  </section>
+</BaseLayout>
+
+<style>
+  .lab-hero,
+  .architecture,
+  .lab-content,
+  .spec-section,
+  .principles {
+    width: min(1180px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .16em;
+  }
+
+  .lab-hero {
+    padding: 90px 0 65px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 40px;
+  }
+
+  .lab-hero h1 {
+    margin: 13px 0 20px;
+    max-width: 760px;
+    font-family: Georgia, serif;
+    font-size: clamp(52px, 7vw, 84px);
+    line-height: .98;
+    letter-spacing: -.05em;
+    font-weight: 500;
+  }
+
+  .lab-hero h1 span {
+    display: block;
+    color: var(--muted);
+  }
+
+  .lab-hero p {
+    max-width: 650px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  .hero-status {
+    flex: 0 0 auto;
+    padding: 10px 15px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: var(--surface);
+    font-size: 11px;
+  }
+
+  .pulse,
+  .status i {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: #20b15a;
+  }
+
+  .architecture {
+    padding: 34px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-soft);
+  }
+
+  .architecture-title h2 {
+    margin: 6px 0 30px;
+    font-size: 26px;
+  }
+
+  .architecture-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1.2fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .architecture-node {
+    min-height: 116px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--surface);
+  }
+
+  .architecture-node.main {
+    border-color: var(--blue);
+    box-shadow: 0 8px 28px rgba(30, 90, 190, .08);
+  }
+
+  .architecture-node > span {
+    color: var(--blue);
+    font-size: 9px;
+    font-weight: 800;
+  }
+
+  .architecture-node strong {
+    margin-top: 14px;
+  }
+
+  .architecture-node small {
+    margin-top: 4px;
+    color: var(--muted);
+  }
+
+  .line {
+    color: var(--blue);
+  }
+
+  .service-row {
+    margin-top: 26px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .service-row span {
+    padding: 7px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+    font-size: 10px;
+  }
+
+  .lab-content {
+    padding: 90px 0;
+  }
+
+  .section-heading {
+    margin-bottom: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+  }
+
+  .section-heading h2 {
+    margin: 7px 0 0;
+    font-size: 32px;
+  }
+
+  .service-count {
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+
+  .service-card {
+    min-height: 190px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+  }
+
+  .service-top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .service-category,
+  .status {
+    font-size: 9px;
+  }
+
+  .service-category {
+    color: var(--blue);
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .status {
+    color: var(--muted);
+  }
+
+  .status i {
+    width: 6px;
+    height: 6px;
+  }
+
+  .service-card h3 {
+    margin: 35px 0 8px;
+    font-size: 18px;
+  }
+
+  .service-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .spec-section {
+    padding: 50px 0 90px;
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 90px;
+  }
+
+  .spec-section h2 {
+    margin: 10px 0 20px;
+    font-size: 40px;
+    line-height: 1.12;
+  }
+
+  .spec-section p {
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .spec-list {
+    border-top: 1px solid var(--line);
+  }
+
+  .spec-list div {
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .spec-list span {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .spec-list strong {
+    font-size: 12px;
+  }
+
+  .principles {
+    margin-bottom: 70px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .principles article {
+    min-height: 180px;
+    padding: 22px;
+    border-right: 1px solid var(--line);
+  }
+
+  .principles article:last-child {
+    border-right: 0;
+  }
+
+  .principles span {
+    color: var(--blue);
+    font-size: 10px;
+    font-weight: 800;
+  }
+
+  .principles h3 {
+    margin: 35px 0 8px;
+  }
+
+  .principles p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  @media (max-width: 900px) {
+    .architecture-flow {
+      grid-template-columns: 1fr;
+    }
+
+    .line {
+      text-align: center;
+      transform: rotate(90deg);
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .spec-section {
+      grid-template-columns: 1fr;
+      gap: 35px;
+    }
+
+    .principles {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .lab-hero {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .services-grid,
+    .principles {
+      grid-template-columns: 1fr;
+    }
+
+    .principles article {
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+  }
+</style>

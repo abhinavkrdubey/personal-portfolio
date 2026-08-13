@@ -1,0 +1,86 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const projects = [
+  {
+    title: "DCS Automation",
+    slug: "dcs-automation",
+    description:
+      "ML-driven classification and automation for complex retail data workflows.",
+    impact: "7 days → 1 day",
+    tags: ["Python", "NLP", "Optuna", "ML"],
+  },
+
+  {
+    title: "MDM Validation Engine",
+    slug: "mdm-validation",
+    description:
+      "Automated validation engine for master-data quality and consistency.",
+    impact: "95%+ validation accuracy",
+    tags: ["Python", "Data Quality", "Automation"],
+  },
+
+  {
+    title: "Product Similarity Detection",
+    slug: "product-similarity",
+    description:
+      "Semantic product matching using Sentence Transformers and embeddings.",
+    impact: "Semantic similarity at scale",
+    tags: ["Embeddings", "NLP", "Sentence Transformers"],
+  },
+
+  {
+    title: "Self-Hosted ML Platform",
+    slug: "homelab-platform",
+    description:
+      "Private ML and AI infrastructure for experimentation, tracking and deployment.",
+    impact: "End-to-end self hosted",
+    tags: ["Docker", "MLflow", "Grafana", "LLMs"],
+  },
+];
+---
+
+<BaseLayout
+  title="Projects — Abhinav"
+  description="Selected machine learning, AI and data science projects."
+>
+  <section class="page-header">
+    <span class="eyebrow">SELECTED WORK</span>
+
+    <h1>Projects</h1>
+
+    <p>
+      Machine learning, automation and AI systems built around
+      real-world problems and measurable outcomes.
+    </p>
+  </section>
+
+  <section class="projects-page-grid">
+    {
+      projects.map((project) => (
+        <a
+          class="project-large"
+          href={`/projects/${project.slug}/`}
+        >
+          <div class="project-number">
+            {String(projects.indexOf(project) + 1).padStart(2, "0")}
+          </div>
+
+          <div>
+            <h2>{project.title}</h2>
+
+            <p>{project.description}</p>
+
+            <strong>{project.impact}</strong>
+
+            <div class="tags">
+              {project.tags.map((tag) => <span>{tag}</span>)}
+            </div>
+          </div>
+
+          <span class="project-arrow">↗</span>
+        </a>
+      ))
+    }
+  </section>
+</BaseLayout>

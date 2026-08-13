@@ -1,0 +1,616 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const EMAIL = "YOUR_EMAIL";
+const LINKEDIN = "YOUR_LINKEDIN_URL";
+const GITHUB = "YOUR_GITHUB_URL";
+---
+
+<BaseLayout
+  title="Contact — Abhinav"
+  description="Get in touch with Abhinav about data science, machine learning, AI and technical opportunities."
+>
+
+  <section class="contact-hero">
+
+    <span class="eyebrow">
+      CONTACT
+    </span>
+
+    <h1>
+      Have an interesting
+      <span>problem to solve?</span>
+    </h1>
+
+    <p>
+      I'm interested in ambitious machine-learning, data and AI problems —
+      especially work where the challenge is bigger than choosing an
+      algorithm.
+    </p>
+
+  </section>
+
+
+  <section class="contact-grid">
+
+    <!-- EMAIL -->
+    <a
+      class="contact-card primary"
+      href={`mailto:${EMAIL}`}
+    >
+
+      <div class="contact-number">
+        01
+      </div>
+
+      <div>
+
+        <span>
+          Email
+        </span>
+
+        <h2>
+          {EMAIL}
+        </h2>
+
+        <p>
+          Best for opportunities, projects and direct conversations.
+        </p>
+
+      </div>
+
+      <span class="arrow">
+        ↗
+      </span>
+
+    </a>
+
+
+    <!-- LINKEDIN -->
+    <a
+      class="contact-card"
+      href={LINKEDIN}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+
+      <div class="contact-number">
+        02
+      </div>
+
+      <div>
+
+        <span>
+          LinkedIn
+        </span>
+
+        <h2>
+          Professional profile
+        </h2>
+
+        <p>
+          Experience, career history and professional updates.
+        </p>
+
+      </div>
+
+      <span class="arrow">
+        ↗
+      </span>
+
+    </a>
+
+
+    <!-- GITHUB -->
+    <a
+      class="contact-card"
+      href={GITHUB}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+
+      <div class="contact-number">
+        03
+      </div>
+
+      <div>
+
+        <span>
+          GitHub
+        </span>
+
+        <h2>
+          Code & projects
+        </h2>
+
+        <p>
+          Repositories, experiments and technical work.
+        </p>
+
+      </div>
+
+      <span class="arrow">
+        ↗
+      </span>
+
+    </a>
+
+
+    <!-- RESUME -->
+    <a
+      class="contact-card"
+      href="/resume.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+
+      <div class="contact-number">
+        04
+      </div>
+
+      <div>
+
+        <span>
+          Résumé
+        </span>
+
+        <h2>
+          View résumé
+        </h2>
+
+        <p>
+          Experience, education, projects and technical background.
+        </p>
+
+      </div>
+
+      <span class="arrow">
+        ↗
+      </span>
+
+    </a>
+
+  </section>
+
+
+  <section class="contact-footer">
+
+    <div>
+
+      <span class="eyebrow">
+        LOCATION
+      </span>
+
+      <strong>
+        India
+      </strong>
+
+    </div>
+
+
+    <div>
+
+      <span class="eyebrow">
+        FOCUS
+      </span>
+
+      <strong>
+        Data Science · ML · AI
+      </strong>
+
+    </div>
+
+
+    <div>
+
+      <span class="eyebrow">
+        STATUS
+      </span>
+
+      <strong>
+        <i></i>
+        Open to meaningful conversations
+      </strong>
+
+    </div>
+
+  </section>
+
+</BaseLayout>
+
+
+<style>
+
+  .contact-hero,
+  .contact-grid,
+  .contact-footer {
+
+    width: min(
+      1180px,
+      calc(100% - 48px)
+    );
+
+    margin-inline: auto;
+
+  }
+
+
+  .contact-hero {
+
+    padding:
+      100px
+      0
+      70px;
+
+  }
+
+
+  .contact-hero h1 {
+
+    max-width: 900px;
+
+    margin:
+      14px
+      0
+      24px;
+
+    font-family:
+      Georgia,
+      serif;
+
+    font-size:
+      clamp(
+        54px,
+        7vw,
+        88px
+      );
+
+    line-height: .98;
+
+    letter-spacing: -.055em;
+
+    font-weight: 500;
+
+  }
+
+
+  .contact-hero h1 span {
+
+    display: block;
+
+    color: var(--muted);
+
+  }
+
+
+  .contact-hero p {
+
+    max-width: 680px;
+
+    color: var(--muted);
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+  }
+
+
+  /* =========================================
+     CONTACT CARDS
+     ========================================= */
+
+  .contact-grid {
+
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    border-top:
+      1px solid
+      var(--line);
+
+    border-left:
+      1px solid
+      var(--line);
+
+  }
+
+
+  .contact-card {
+
+    position: relative;
+
+    min-height: 250px;
+
+    padding: 26px;
+
+    display: grid;
+
+    grid-template-columns:
+      45px
+      1fr
+      auto;
+
+    gap: 20px;
+
+    border-right:
+      1px solid
+      var(--line);
+
+    border-bottom:
+      1px solid
+      var(--line);
+
+    background:
+      var(--surface);
+
+    transition:
+      background .18s ease,
+      transform .18s ease,
+      box-shadow .18s ease;
+
+  }
+
+
+  .contact-card:hover {
+
+    z-index: 2;
+
+    background:
+      var(--surface-soft);
+
+    transform:
+      translateY(-2px);
+
+    box-shadow:
+      var(--shadow);
+
+  }
+
+
+  .contact-number {
+
+    color:
+      var(--blue);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+  }
+
+
+  .contact-card > div:nth-child(2) {
+
+    align-self: center;
+
+  }
+
+
+  .contact-card span:not(.arrow) {
+
+    color:
+      var(--muted);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform:
+      uppercase;
+
+    letter-spacing:
+      .1em;
+
+  }
+
+
+  .contact-card h2 {
+
+    margin:
+      8px
+      0
+      10px;
+
+    font-size:
+      23px;
+
+    letter-spacing:
+      -.03em;
+
+  }
+
+
+  .contact-card p {
+
+    max-width:
+      390px;
+
+    margin: 0;
+
+    color:
+      var(--muted);
+
+    font-size:
+      12px;
+
+    line-height:
+      1.65;
+
+  }
+
+
+  .arrow {
+
+    align-self:
+      start;
+
+    color:
+      var(--blue);
+
+    font-size:
+      24px;
+
+    transition:
+      transform
+      .18s ease;
+
+  }
+
+
+  .contact-card:hover .arrow {
+
+    transform:
+      translate(
+        3px,
+        -3px
+      );
+
+  }
+
+
+  /* =========================================
+     CONTACT DETAILS
+     ========================================= */
+
+  .contact-footer {
+
+    margin-top:
+      65px;
+
+    margin-bottom:
+      80px;
+
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(
+        3,
+        1fr
+      );
+
+    border-top:
+      1px solid
+      var(--line);
+
+    border-bottom:
+      1px solid
+      var(--line);
+
+  }
+
+
+  .contact-footer div {
+
+    padding:
+      24px
+      20px;
+
+    border-right:
+      1px solid
+      var(--line);
+
+  }
+
+
+  .contact-footer div:last-child {
+
+    border-right: 0;
+
+  }
+
+
+  .contact-footer strong {
+
+    display: block;
+
+    margin-top:
+      8px;
+
+    font-size:
+      12px;
+
+  }
+
+
+  .contact-footer i {
+
+    display:
+      inline-block;
+
+    width:
+      7px;
+
+    height:
+      7px;
+
+    margin-right:
+      6px;
+
+    border-radius:
+      50%;
+
+    background:
+      var(--success);
+
+  }
+
+
+  /* =========================================
+     MOBILE
+     ========================================= */
+
+  @media (
+    max-width: 760px
+  ) {
+
+    .contact-grid {
+
+      grid-template-columns:
+        1fr;
+
+    }
+
+
+    .contact-card {
+
+      min-height:
+        210px;
+
+    }
+
+
+    .contact-footer {
+
+      grid-template-columns:
+        1fr;
+
+    }
+
+
+    .contact-footer div {
+
+      border-right:
+        0;
+
+      border-bottom:
+        1px solid
+        var(--line);
+
+    }
+
+
+    .contact-footer div:last-child {
+
+      border-bottom:
+        0;
+
+    }
+
+  }
+
+</style>

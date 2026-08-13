@@ -1,0 +1,338 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const principles = [
+  {
+    number: "01",
+    title: "Understand before modeling",
+    text: "A sophisticated model solving the wrong problem is still a bad solution."
+  },
+  {
+    number: "02",
+    title: "Start with the baseline",
+    text: "Complexity has to earn its place. Simple, interpretable approaches come first."
+  },
+  {
+    number: "03",
+    title: "Measure what matters",
+    text: "Technical metrics matter only when they connect to the actual objective."
+  },
+  {
+    number: "04",
+    title: "Production is part of data science",
+    text: "A notebook is not the end product. Reliability, deployment and monitoring matter."
+  }
+];
+---
+
+<BaseLayout
+  title="About — Abhinav"
+  description="About Abhinav, a Senior Data Scientist focused on machine learning, AI systems and production data products."
+>
+  <section class="about-hero">
+    <div>
+      <span class="eyebrow">ABOUT</span>
+
+      <h1>
+        I like solving the
+        <span>hard part before the model.</span>
+      </h1>
+    </div>
+
+    <p>
+      I'm Abhinav, a Senior Data Scientist working across machine learning,
+      statistics, automation and AI systems.
+    </p>
+  </section>
+
+  <section class="story">
+    <aside>
+      <span>MY APPROACH</span>
+    </aside>
+
+    <div class="story-content">
+      <p class="lead">
+        The part of data science I enjoy most isn't choosing an algorithm.
+        It's figuring out what the problem actually is.
+      </p>
+
+      <p>
+        Real-world problems rarely arrive as clean prediction tasks. They
+        arrive as ambiguous requirements, messy data, conflicting business
+        rules and workflows that have evolved over years.
+      </p>
+
+      <p>
+        My approach is to reduce that ambiguity into something measurable:
+        understand the data, establish a baseline, identify the actual
+        constraints, choose the simplest methodology that works, and then
+        build the surrounding system required to make it useful.
+      </p>
+
+      <p>
+        That means I care about statistics and modeling, but also APIs,
+        reproducibility, deployment, monitoring and infrastructure.
+      </p>
+    </div>
+  </section>
+
+  <section class="principles">
+    <div class="section-title">
+      <span class="eyebrow">PRINCIPLES</span>
+      <h2>How I approach technical problems.</h2>
+    </div>
+
+    <div class="principles-grid">
+      {
+        principles.map((item) => (
+          <article>
+            <span>{item.number}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="interests">
+    <div>
+      <span class="eyebrow">CURRENT FOCUS</span>
+      <h2>What I'm going deeper on.</h2>
+    </div>
+
+    <div class="interest-list">
+      <div>
+        <span>Machine Learning</span>
+        <strong>Foundations → Production</strong>
+      </div>
+
+      <div>
+        <span>Statistics</span>
+        <strong>Inference → Experimental Design</strong>
+      </div>
+
+      <div>
+        <span>AI</span>
+        <strong>Transformers → LLM Systems</strong>
+      </div>
+
+      <div>
+        <span>Engineering</span>
+        <strong>APIs → MLOps → Infrastructure</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-cta">
+    <div>
+      <span class="eyebrow">WORK</span>
+      <h2>See how that thinking translates into projects.</h2>
+    </div>
+
+    <a href="/projects/">View projects →</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-hero,
+  .story,
+  .principles,
+  .interests,
+  .about-cta {
+    width: min(1180px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .16em;
+  }
+
+  .about-hero {
+    padding: 90px 0 80px;
+    display: grid;
+    grid-template-columns: 1.4fr .6fr;
+    gap: 80px;
+    align-items: end;
+  }
+
+  .about-hero h1 {
+    margin: 14px 0 0;
+    max-width: 760px;
+    font-family: Georgia, serif;
+    font-size: clamp(52px, 7vw, 82px);
+    line-height: 1;
+    letter-spacing: -.05em;
+    font-weight: 500;
+  }
+
+  .about-hero h1 span {
+    display: block;
+    color: var(--muted);
+  }
+
+  .about-hero > p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .story {
+    padding: 70px 0;
+    display: grid;
+    grid-template-columns: .35fr 1fr;
+    border-top: 1px solid var(--line);
+  }
+
+  .story aside span {
+    color: var(--blue);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .14em;
+  }
+
+  .story-content {
+    max-width: 760px;
+  }
+
+  .story-content p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.85;
+  }
+
+  .story-content .lead {
+    margin-top: 0;
+    color: var(--text);
+    font-family: Georgia, serif;
+    font-size: 30px;
+    line-height: 1.35;
+  }
+
+  .principles {
+    padding: 70px 0;
+  }
+
+  .section-title h2 {
+    margin: 8px 0 30px;
+    font-size: 32px;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .principles-grid article {
+    min-height: 230px;
+    padding: 24px;
+    border-right: 1px solid var(--line);
+  }
+
+  .principles-grid article:last-child {
+    border-right: 0;
+  }
+
+  .principles-grid span {
+    color: var(--blue);
+    font-size: 10px;
+    font-weight: 800;
+  }
+
+  .principles-grid h3 {
+    margin: 55px 0 10px;
+    font-size: 17px;
+  }
+
+  .principles-grid p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .interests {
+    padding: 80px 0;
+    display: grid;
+    grid-template-columns: .7fr 1.3fr;
+    gap: 80px;
+  }
+
+  .interests h2 {
+    margin: 8px 0;
+    font-size: 32px;
+  }
+
+  .interest-list {
+    border-top: 1px solid var(--line);
+  }
+
+  .interest-list div {
+    padding: 17px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .interest-list span {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .interest-list strong {
+    font-size: 12px;
+  }
+
+  .about-cta {
+    margin-bottom: 70px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface-soft);
+  }
+
+  .about-cta h2 {
+    margin: 8px 0 0;
+    font-size: 20px;
+  }
+
+  .about-cta a {
+    color: var(--blue);
+    font-weight: 750;
+  }
+
+  @media (max-width: 780px) {
+    .about-hero,
+    .story,
+    .interests {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .principles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .principles-grid article {
+      min-height: auto;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .about-cta {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 18px;
+    }
+  }
+</style>

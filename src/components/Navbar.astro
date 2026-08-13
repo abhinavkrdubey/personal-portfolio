@@ -1,0 +1,98 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+  {
+    name: "Home",
+    href: "/"
+  },
+  {
+    name: "Projects",
+    href: "/projects/"
+  },
+  {
+    name: "Experience",
+    href: "/experience/"
+  },
+  {
+    name: "Stack",
+    href: "/stack/"
+  },
+  {
+    name: "Homelab",
+    href: "/homelab/"
+  },
+  {
+    name: "About",
+    href: "/about/"
+  },
+  {
+    name: "Contact",
+    href: "/contact/"
+  }
+];
+
+function isActive(href) {
+  if (href === "/") {
+    return currentPath === "/";
+  }
+
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="navbar">
+
+  <!-- BRAND -->
+  <a
+    class="brand"
+    href="/"
+    aria-label="Abhinav Kumar Dubey  homepage"
+  >
+    Abhinav Kumar Dubey
+  </a>
+
+
+  <!-- NAVIGATION -->
+  <nav aria-label="Main navigation">
+
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          class={isActive(link.href) ? "active" : ""}
+        >
+          {link.name}
+        </a>
+      ))
+    }
+
+  </nav>
+
+
+  <!-- RIGHT ACTIONS -->
+  <div class="nav-actions">
+
+    <a
+      class="resume-link"
+      href="/resume.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Open résumé in a new tab"
+    >
+      Resume
+      <span>↗</span>
+    </a>
+
+    <button
+      id="theme-toggle"
+      type="button"
+      aria-label="Toggle light and dark theme"
+      title="Toggle theme"
+    >
+      ◐
+    </button>
+
+  </div>
+
+</header>

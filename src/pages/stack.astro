@@ -1,0 +1,351 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const groups = [
+  {
+    title: "Machine Learning",
+    description: "Modeling, experimentation and production ML systems.",
+    items: [
+      "scikit-learn",
+      "XGBoost",
+      "Optuna",
+      "Feature Engineering",
+      "Classification",
+      "Regression",
+      "Model Evaluation",
+      "Explainability"
+    ]
+  },
+  {
+    title: "AI & NLP",
+    description: "Semantic systems, language models and intelligent automation.",
+    items: [
+      "LLMs",
+      "Sentence Transformers",
+      "Embeddings",
+      "RAG",
+      "NLP",
+      "Vector Search",
+      "Prompt Engineering",
+      "Local Inference"
+    ]
+  },
+  {
+    title: "Data & Statistics",
+    description: "The statistical and analytical foundation behind the models.",
+    items: [
+      "Pandas",
+      "NumPy",
+      "Statistics",
+      "Hypothesis Testing",
+      "Cramér's V",
+      "ANOVA",
+      "Regression Analysis",
+      "Data Quality"
+    ]
+  },
+  {
+    title: "MLOps & Engineering",
+    description: "Taking experiments beyond notebooks and into reliable systems.",
+    items: [
+      "MLflow",
+      "FastAPI",
+      "Docker",
+      "PostgreSQL",
+      "Git",
+      "Linux",
+      "REST APIs",
+      "Experiment Tracking"
+    ]
+  },
+  {
+    title: "Infrastructure",
+    description: "Self-hosted systems for development, deployment and observability.",
+    items: [
+      "Ubuntu Server",
+      "Caddy",
+      "Prometheus",
+      "Grafana",
+      "cAdvisor",
+      "NVIDIA",
+      "JupyterLab",
+      "Docker Compose"
+    ]
+  }
+];
+
+const workflow = [
+  ["01", "Frame", "Translate an ambiguous business problem into a measurable technical problem."],
+  ["02", "Explore", "Understand data quality, distributions, leakage, constraints and baselines."],
+  ["03", "Model", "Build the simplest defensible approach before increasing complexity."],
+  ["04", "Validate", "Evaluate statistically and against the actual business objective."],
+  ["05", "Ship", "Package the solution into a reproducible API, workflow or application."],
+  ["06", "Monitor", "Track model behavior, infrastructure and operational performance."]
+];
+---
+
+<BaseLayout
+  title="Technical Stack — Abhinav"
+  description="Technologies, methodologies and engineering tools I use to build machine learning and AI systems."
+>
+  <section class="page-hero">
+    <span class="eyebrow">TECHNICAL FOCUS</span>
+
+    <h1>
+      Tools matter.
+      <span>How they're used matters more.</span>
+    </h1>
+
+    <p>
+      My stack spans statistics, machine learning, AI, software engineering
+      and infrastructure — with the goal of taking problems from analysis
+      through production.
+    </p>
+  </section>
+
+  <section class="stack-grid">
+    {
+      groups.map((group, index) => (
+        <article class="stack-card">
+          <div class="stack-number">
+            {String(index + 1).padStart(2, "0")}
+          </div>
+
+          <h2>{group.title}</h2>
+          <p>{group.description}</p>
+
+          <div class="chips">
+            {group.items.map((item) => <span>{item}</span>)}
+          </div>
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="workflow">
+    <div class="section-header">
+      <span class="eyebrow">WORKING STYLE</span>
+      <h2>From ambiguity to production.</h2>
+    </div>
+
+    <div class="workflow-list">
+      {
+        workflow.map(([number, title, description]) => (
+          <article>
+            <span class="workflow-number">{number}</span>
+
+            <div>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </div>
+
+            <span class="arrow">→</span>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bottom-cta">
+    <div>
+      <span class="eyebrow">SELECTED WORK</span>
+      <h2>See the stack applied to real problems.</h2>
+    </div>
+
+    <a href="/projects/">Explore projects →</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero,
+  .stack-grid,
+  .workflow,
+  .bottom-cta {
+    width: min(1180px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+
+  .page-hero {
+    padding: 90px 0 64px;
+    max-width: 1180px;
+  }
+
+  .eyebrow {
+    display: block;
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .16em;
+  }
+
+  .page-hero h1 {
+    max-width: 850px;
+    margin: 14px 0 20px;
+    font-family: Georgia, serif;
+    font-size: clamp(48px, 6vw, 78px);
+    line-height: 1.03;
+    letter-spacing: -.045em;
+    font-weight: 500;
+  }
+
+  .page-hero h1 span {
+    color: var(--muted);
+  }
+
+  .page-hero p {
+    max-width: 660px;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .stack-card {
+    position: relative;
+    min-height: 280px;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    transition: .2s ease;
+  }
+
+  .stack-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+  }
+
+  .stack-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .stack-number {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .12em;
+  }
+
+  .stack-card h2 {
+    margin: 35px 0 8px;
+    font-size: 24px;
+    letter-spacing: -.03em;
+  }
+
+  .stack-card p {
+    max-width: 520px;
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 28px;
+  }
+
+  .chips span {
+    padding: 7px 11px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface-soft);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .workflow {
+    padding: 100px 0;
+  }
+
+  .section-header h2 {
+    margin: 10px 0 32px;
+    font-size: 34px;
+    letter-spacing: -.035em;
+  }
+
+  .workflow-list {
+    border-top: 1px solid var(--line);
+  }
+
+  .workflow-list article {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 22px;
+    align-items: center;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .workflow-number {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .workflow-list h3 {
+    margin: 0 0 4px;
+    font-size: 16px;
+  }
+
+  .workflow-list p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .arrow {
+    color: var(--muted);
+    font-size: 20px;
+  }
+
+  .bottom-cta {
+    margin-bottom: 70px;
+    padding: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface-soft);
+  }
+
+  .bottom-cta h2 {
+    margin: 7px 0 0;
+    font-size: 20px;
+  }
+
+  .bottom-cta a {
+    color: var(--blue);
+    font-weight: 750;
+  }
+
+  @media (max-width: 760px) {
+    .stack-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stack-card:last-child {
+      grid-column: auto;
+    }
+
+    .workflow-list article {
+      grid-template-columns: 40px 1fr;
+    }
+
+    .arrow {
+      display: none;
+    }
+
+    .bottom-cta {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+</style>

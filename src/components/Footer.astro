@@ -1,0 +1,96 @@
+<footer class="site-footer">
+  <div class="footer-left">
+    <a class="footer-brand" href="/">Abhinav Kumar Dubey</a>
+    <span>© 2026 Abhinav Kumar Dubey</span>
+  </div>
+
+  <div class="footer-center">
+    Built with care · Deployed from my homelab.
+  </div>
+
+  <div class="footer-links">
+    <a
+      href="https://github.com/abhinavkrdubey"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      GitHub
+    </a>
+
+    <a
+      href="https://www.linkedin.com/in/abhinavkrdubey/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      LinkedIn
+    </a>
+
+    <a href="mailto:abhinavkumardubey9481@gmail.com">
+      Email
+    </a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    width: min(1180px, calc(100% - 48px));
+    min-height: 82px;
+    margin-inline: auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+
+    border-top: 1px solid var(--line);
+
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .footer-brand {
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 750;
+  }
+
+  .footer-center {
+    text-align: center;
+  }
+
+  .footer-links {
+    justify-self: end;
+
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-links a {
+    transition: color .15s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--blue);
+  }
+
+  @media (max-width: 720px) {
+    .site-footer {
+      padding: 25px 0;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .footer-center {
+      text-align: left;
+    }
+
+    .footer-links {
+      justify-self: start;
+    }
+  }
+</style>
