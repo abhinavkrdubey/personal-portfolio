@@ -1,92 +1,53 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const principles = [
-  {
-    number: "01",
-    title: "Understand before modeling",
-    text: "A sophisticated model solving the wrong problem is still a bad solution."
-  },
-  {
-    number: "02",
-    title: "Start with the baseline",
-    text: "Complexity has to earn its place. Simple, interpretable approaches come first."
-  },
-  {
-    number: "03",
-    title: "Measure what matters",
-    text: "Technical metrics matter only when they connect to the actual objective."
-  },
-  {
-    number: "04",
-    title: "Production is part of data science",
-    text: "A notebook is not the end product. Reliability, deployment and monitoring matter."
-  }
-];
+import { getEntry } from "astro:content";
+const site = (await getEntry("pages", "site"))!.data;
+const page = (await getEntry("pages", "about"))!.data;
 ---
 
 <BaseLayout
-  title="About — Abhinav"
-  description="About Abhinav, a Senior Data Scientist focused on machine learning, AI systems and production data products."
+  title={`About — ${site.shortName}`}
+  description={`About ${site.shortName}, a ${site.role} focused on machine learning, AI systems and production data products.`}
 >
   <section class="about-hero">
     <div>
-      <span class="eyebrow">ABOUT</span>
+      <span class="eyebrow">{page.eyebrow}</span>
 
       <h1>
-        I like solving the
-        <span>hard part before the model.</span>
+        {page.headline}
       </h1>
     </div>
 
     <p>
-      I'm Abhinav, a Senior Data Scientist working across machine learning,
-      statistics, automation and AI systems.
+      {page.intro}
     </p>
   </section>
 
   <section class="story">
     <aside>
-      <span>MY APPROACH</span>
+      <span>{page.approachLabel}</span>
     </aside>
 
     <div class="story-content">
       <p class="lead">
-        The part of data science I enjoy most isn't choosing an algorithm.
-        It's figuring out what the problem actually is.
+        {page.approachLead}
       </p>
 
-      <p>
-        Real-world problems rarely arrive as clean prediction tasks. They
-        arrive as ambiguous requirements, messy data, conflicting business
-        rules and workflows that have evolved over years.
-      </p>
-
-      <p>
-        My approach is to reduce that ambiguity into something measurable:
-        understand the data, establish a baseline, identify the actual
-        constraints, choose the simplest methodology that works, and then
-        build the surrounding system required to make it useful.
-      </p>
-
-      <p>
-        That means I care about statistics and modeling, but also APIs,
-        reproducibility, deployment, monitoring and infrastructure.
-      </p>
+      {page.approach.map((paragraph) => <p>{paragraph}</p>)}
     </div>
   </section>
 
   <section class="principles">
     <div class="section-title">
-      <span class="eyebrow">PRINCIPLES</span>
-      <h2>How I approach technical problems.</h2>
+      <span class="eyebrow">{page.principlesLabel}</span>
+      <h2>{page.principlesTitle}</h2>
     </div>
 
     <div class="principles-grid">
       {
-        principles.map((item) => (
+        page.principles.map((item, index) => (
           <article>
-            <span>{item.number}</span>
+            <span>{String(index + 1).padStart(2, "0")}</span>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
           </article>
@@ -97,37 +58,19 @@ const principles = [
 
   <section class="interests">
     <div>
-      <span class="eyebrow">CURRENT FOCUS</span>
-      <h2>What I'm going deeper on.</h2>
+      <span class="eyebrow">{page.focusLabel}</span>
+      <h2>{page.focusTitle}</h2>
     </div>
 
     <div class="interest-list">
-      <div>
-        <span>Machine Learning</span>
-        <strong>Foundations → Production</strong>
-      </div>
-
-      <div>
-        <span>Statistics</span>
-        <strong>Inference → Experimental Design</strong>
-      </div>
-
-      <div>
-        <span>AI</span>
-        <strong>Transformers → LLM Systems</strong>
-      </div>
-
-      <div>
-        <span>Engineering</span>
-        <strong>APIs → MLOps → Infrastructure</strong>
-      </div>
+      {page.focus.map((item) => <div><span>{item.name}</span><strong>{item.detail}</strong></div>)}
     </div>
   </section>
 
   <section class="about-cta">
     <div>
-      <span class="eyebrow">WORK</span>
-      <h2>See how that thinking translates into projects.</h2>
+      <span class="eyebrow">{page.ctaLabel}</span>
+      <h2>{page.cta}</h2>
     </div>
 
     <a href="/projects/">View projects →</a>

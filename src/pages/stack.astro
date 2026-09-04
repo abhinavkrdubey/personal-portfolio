@@ -1,105 +1,25 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const groups = [
-  {
-    title: "Machine Learning",
-    description: "Modeling, experimentation and production ML systems.",
-    items: [
-      "scikit-learn",
-      "XGBoost",
-      "Optuna",
-      "Feature Engineering",
-      "Classification",
-      "Regression",
-      "Model Evaluation",
-      "Explainability"
-    ]
-  },
-  {
-    title: "AI & NLP",
-    description: "Semantic systems, language models and intelligent automation.",
-    items: [
-      "LLMs",
-      "Sentence Transformers",
-      "Embeddings",
-      "RAG",
-      "NLP",
-      "Vector Search",
-      "Prompt Engineering",
-      "Local Inference"
-    ]
-  },
-  {
-    title: "Data & Statistics",
-    description: "The statistical and analytical foundation behind the models.",
-    items: [
-      "Pandas",
-      "NumPy",
-      "Statistics",
-      "Hypothesis Testing",
-      "Cramér's V",
-      "ANOVA",
-      "Regression Analysis",
-      "Data Quality"
-    ]
-  },
-  {
-    title: "MLOps & Engineering",
-    description: "Taking experiments beyond notebooks and into reliable systems.",
-    items: [
-      "MLflow",
-      "FastAPI",
-      "Docker",
-      "PostgreSQL",
-      "Git",
-      "Linux",
-      "REST APIs",
-      "Experiment Tracking"
-    ]
-  },
-  {
-    title: "Infrastructure",
-    description: "Self-hosted systems for development, deployment and observability.",
-    items: [
-      "Ubuntu Server",
-      "Caddy",
-      "Prometheus",
-      "Grafana",
-      "cAdvisor",
-      "NVIDIA",
-      "JupyterLab",
-      "Docker Compose"
-    ]
-  }
-];
-
-const workflow = [
-  ["01", "Frame", "Translate an ambiguous business problem into a measurable technical problem."],
-  ["02", "Explore", "Understand data quality, distributions, leakage, constraints and baselines."],
-  ["03", "Model", "Build the simplest defensible approach before increasing complexity."],
-  ["04", "Validate", "Evaluate statistically and against the actual business objective."],
-  ["05", "Ship", "Package the solution into a reproducible API, workflow or application."],
-  ["06", "Monitor", "Track model behavior, infrastructure and operational performance."]
-];
+import { getEntry } from "astro:content";
+const site = (await getEntry("pages", "site"))!.data;
+const page = (await getEntry("pages", "stack"))!.data;
+const groups = page.groups;
+const workflow = page.workflow;
 ---
 
 <BaseLayout
-  title="Technical Stack — Abhinav"
+  title={`Technical Stack — ${site.shortName}`}
   description="Technologies, methodologies and engineering tools I use to build machine learning and AI systems."
 >
   <section class="page-hero">
-    <span class="eyebrow">TECHNICAL FOCUS</span>
+    <span class="eyebrow">{page.eyebrow}</span>
 
     <h1>
-      Tools matter.
-      <span>How they're used matters more.</span>
+      {page.headline}
     </h1>
 
     <p>
-      My stack spans statistics, machine learning, AI, software engineering
-      and infrastructure — with the goal of taking problems from analysis
-      through production.
+      {page.intro}
     </p>
   </section>
 
@@ -124,19 +44,19 @@ const workflow = [
 
   <section class="workflow">
     <div class="section-header">
-      <span class="eyebrow">WORKING STYLE</span>
-      <h2>From ambiguity to production.</h2>
+      <span class="eyebrow">{page.workflowLabel}</span>
+      <h2>{page.workflowTitle}</h2>
     </div>
 
     <div class="workflow-list">
       {
-        workflow.map(([number, title, description]) => (
+        workflow.map((item, index) => (
           <article>
-            <span class="workflow-number">{number}</span>
+            <span class="workflow-number">{String(index + 1).padStart(2, "0")}</span>
 
             <div>
-              <h3>{title}</h3>
-              <p>{description}</p>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
             </div>
 
             <span class="arrow">→</span>
@@ -148,8 +68,8 @@ const workflow = [
 
   <section class="bottom-cta">
     <div>
-      <span class="eyebrow">SELECTED WORK</span>
-      <h2>See the stack applied to real problems.</h2>
+      <span class="eyebrow">{page.ctaLabel}</span>
+      <h2>{page.ctaTitle}</h2>
     </div>
 
     <a href="/projects/">Explore projects →</a>

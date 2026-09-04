@@ -1,31 +1,27 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const EMAIL = "YOUR_EMAIL";
-const LINKEDIN = "YOUR_LINKEDIN_URL";
-const GITHUB = "YOUR_GITHUB_URL";
+import { getEntry } from "astro:content";
+const site = (await getEntry("pages", "site"))!.data;
+const page = (await getEntry("pages", "contact"))!.data;
 ---
 
 <BaseLayout
-  title="Contact — Abhinav"
-  description="Get in touch with Abhinav about data science, machine learning, AI and technical opportunities."
+  title={`Contact — ${site.shortName}`}
+  description={`Get in touch with ${site.shortName} about data science, machine learning, AI and technical opportunities.`}
 >
 
   <section class="contact-hero">
 
     <span class="eyebrow">
-      CONTACT
+      {page.eyebrow}
     </span>
 
     <h1>
-      Have an interesting
-      <span>problem to solve?</span>
+      {page.headline}
     </h1>
 
     <p>
-      I'm interested in ambitious machine-learning, data and AI problems —
-      especially work where the challenge is bigger than choosing an
-      algorithm.
+      {page.intro}
     </p>
 
   </section>
@@ -36,7 +32,7 @@ const GITHUB = "YOUR_GITHUB_URL";
     <!-- EMAIL -->
     <a
       class="contact-card primary"
-      href={`mailto:${EMAIL}`}
+      href={`mailto:${site.email}`}
     >
 
       <div class="contact-number">
@@ -50,11 +46,11 @@ const GITHUB = "YOUR_GITHUB_URL";
         </span>
 
         <h2>
-          {EMAIL}
+          {site.email}
         </h2>
 
         <p>
-          Best for opportunities, projects and direct conversations.
+          {page.emailDescription}
         </p>
 
       </div>
@@ -69,7 +65,7 @@ const GITHUB = "YOUR_GITHUB_URL";
     <!-- LINKEDIN -->
     <a
       class="contact-card"
-      href={LINKEDIN}
+      href={site.linkedin}
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -89,7 +85,7 @@ const GITHUB = "YOUR_GITHUB_URL";
         </h2>
 
         <p>
-          Experience, career history and professional updates.
+          {page.linkedinDescription}
         </p>
 
       </div>
@@ -104,7 +100,7 @@ const GITHUB = "YOUR_GITHUB_URL";
     <!-- GITHUB -->
     <a
       class="contact-card"
-      href={GITHUB}
+      href={site.github}
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -124,7 +120,7 @@ const GITHUB = "YOUR_GITHUB_URL";
         </h2>
 
         <p>
-          Repositories, experiments and technical work.
+          {page.githubDescription}
         </p>
 
       </div>
@@ -139,7 +135,7 @@ const GITHUB = "YOUR_GITHUB_URL";
     <!-- RESUME -->
     <a
       class="contact-card"
-      href="/resume.pdf"
+      href={site.resume}
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -159,7 +155,7 @@ const GITHUB = "YOUR_GITHUB_URL";
         </h2>
 
         <p>
-          Experience, education, projects and technical background.
+          {page.resumeDescription}
         </p>
 
       </div>
@@ -182,7 +178,7 @@ const GITHUB = "YOUR_GITHUB_URL";
       </span>
 
       <strong>
-        India
+        {site.location}
       </strong>
 
     </div>
@@ -195,7 +191,7 @@ const GITHUB = "YOUR_GITHUB_URL";
       </span>
 
       <strong>
-        Data Science · ML · AI
+        {page.focus}
       </strong>
 
     </div>
@@ -209,7 +205,7 @@ const GITHUB = "YOUR_GITHUB_URL";
 
       <strong>
         <i></i>
-        Open to meaningful conversations
+        {page.status}
       </strong>
 
     </div>

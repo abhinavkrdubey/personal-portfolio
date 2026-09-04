@@ -1,34 +1,33 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection, getEntry } from "astro:content";
+const site = (await getEntry("pages", "site"))!.data;
+const page = (await getEntry("pages", "experience"))!.data;
+const experience = (await getCollection("experience")).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="Experience — Abhinav">
+<BaseLayout title={`Experience — ${site.shortName}`}>
 
   <section class="page-header">
-    <span class="eyebrow">CAREER</span>
+    <span class="eyebrow">{page.eyebrow}</span>
 
-    <h1>Experience</h1>
+    <h1>{page.title}</h1>
 
     <p>
-      Building data science, machine-learning and analytics systems
-      across production environments.
+      {page.intro}
     </p>
   </section>
 
   <section class="experience-page">
 
-    <article>
-      <span>Current</span>
-
-      <h2>Senior Data Scientist</h2>
-
-      <h3>Circana</h3>
-
-      <p>
-        Machine learning, AI automation, data products,
-        experimentation and production ML systems.
-      </p>
-    </article>
+    {experience.map((item) => (
+      <article>
+        <span>{item.data.period}</span>
+        <h2>{item.data.role}</h2>
+        <h3>{item.data.company}</h3>
+        <p>{item.data.summary}</p>
+      </article>
+    ))}
 
   </section>
 

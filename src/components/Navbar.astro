@@ -1,36 +1,9 @@
 ---
-const currentPath = Astro.url.pathname;
+import { getEntry } from "astro:content";
 
-const links = [
-  {
-    name: "Home",
-    href: "/"
-  },
-  {
-    name: "Projects",
-    href: "/projects/"
-  },
-  {
-    name: "Experience",
-    href: "/experience/"
-  },
-  {
-    name: "Stack",
-    href: "/stack/"
-  },
-  {
-    name: "Homelab",
-    href: "/homelab/"
-  },
-  {
-    name: "About",
-    href: "/about/"
-  },
-  {
-    name: "Contact",
-    href: "/contact/"
-  }
-];
+const currentPath = Astro.url.pathname;
+const site = (await getEntry("pages", "site"))!.data;
+const links = site.nav;
 
 function isActive(href) {
   if (href === "/") {
@@ -47,9 +20,9 @@ function isActive(href) {
   <a
     class="brand"
     href="/"
-    aria-label="Abhinav Kumar Dubey  homepage"
+    aria-label={`${site.name} homepage`}
   >
-    Abhinav Kumar Dubey
+    {site.name}
   </a>
 
 
@@ -75,7 +48,7 @@ function isActive(href) {
 
     <a
       class="resume-link"
-      href="/resume.pdf"
+      href={site.resume}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Open résumé in a new tab"

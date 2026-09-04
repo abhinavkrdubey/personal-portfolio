@@ -1,57 +1,24 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, getEntry } from "astro:content";
 
-const projects = [
-  {
-    title: "DCS Automation",
-    slug: "dcs-automation",
-    description:
-      "ML-driven classification and automation for complex retail data workflows.",
-    impact: "7 days → 1 day",
-    tags: ["Python", "NLP", "Optuna", "ML"],
-  },
-
-  {
-    title: "MDM Validation Engine",
-    slug: "mdm-validation",
-    description:
-      "Automated validation engine for master-data quality and consistency.",
-    impact: "95%+ validation accuracy",
-    tags: ["Python", "Data Quality", "Automation"],
-  },
-
-  {
-    title: "Product Similarity Detection",
-    slug: "product-similarity",
-    description:
-      "Semantic product matching using Sentence Transformers and embeddings.",
-    impact: "Semantic similarity at scale",
-    tags: ["Embeddings", "NLP", "Sentence Transformers"],
-  },
-
-  {
-    title: "Self-Hosted ML Platform",
-    slug: "homelab-platform",
-    description:
-      "Private ML and AI infrastructure for experimentation, tracking and deployment.",
-    impact: "End-to-end self hosted",
-    tags: ["Docker", "MLflow", "Grafana", "LLMs"],
-  },
-];
+const projects = (await getCollection("projects"))
+  .sort((a, b) => a.data.order - b.data.order);
+const site = (await getEntry("pages", "site"))!.data;
+const page = (await getEntry("pages", "projects"))!.data;
 ---
 
 <BaseLayout
-  title="Projects — Abhinav"
+  title={`Projects — ${site.shortName}`}
   description="Selected machine learning, AI and data science projects."
 >
   <section class="page-header">
-    <span class="eyebrow">SELECTED WORK</span>
+    <span class="eyebrow">{page.eyebrow}</span>
 
-    <h1>Projects</h1>
+    <h1>{page.title}</h1>
 
     <p>
-      Machine learning, automation and AI systems built around
-      real-world problems and measurable outcomes.
+      {page.intro}
     </p>
   </section>
 
@@ -60,21 +27,21 @@ const projects = [
       projects.map((project) => (
         <a
           class="project-large"
-          href={`/projects/${project.slug}/`}
+          href={`/projects/${project.id}/`}
         >
           <div class="project-number">
             {String(projects.indexOf(project) + 1).padStart(2, "0")}
           </div>
 
           <div>
-            <h2>{project.title}</h2>
+            <h2>{project.data.title}</h2>
 
-            <p>{project.description}</p>
+            <p>{project.data.description}</p>
 
-            <strong>{project.impact}</strong>
+            <strong>{project.data.impact}</strong>
 
             <div class="tags">
-              {project.tags.map((tag) => <span>{tag}</span>)}
+              {project.data.tags.map((tag) => <span>{tag}</span>)}
             </div>
           </div>
 

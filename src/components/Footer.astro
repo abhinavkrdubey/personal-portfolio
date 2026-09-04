@@ -1,16 +1,21 @@
+---
+import { getEntry } from "astro:content";
+const site = (await getEntry("pages", "site"))!.data;
+---
+
 <footer class="site-footer">
   <div class="footer-left">
-    <a class="footer-brand" href="/">Abhinav Kumar Dubey</a>
-    <span>© 2026 Abhinav Kumar Dubey</span>
+    <a class="footer-brand" href="/">{site.name}</a>
+    <span>© {new Date().getFullYear()} {site.name}</span>
   </div>
 
   <div class="footer-center">
-    Built with care · Deployed from my homelab.
+    {site.footerText}
   </div>
 
   <div class="footer-links">
     <a
-      href="https://github.com/abhinavkrdubey"
+      href={site.github}
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -18,14 +23,14 @@
     </a>
 
     <a
-      href="https://www.linkedin.com/in/abhinavkrdubey/"
+      href={site.linkedin}
       target="_blank"
       rel="noopener noreferrer"
     >
       LinkedIn
     </a>
 
-    <a href="mailto:abhinavkumardubey9481@gmail.com">
+    <a href={`mailto:${site.email}`}>
       Email
     </a>
   </div>

@@ -1,148 +1,56 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const services = [
-  {
-    name: "JupyterLab",
-    category: "Development",
-    description: "Centralized Python and data-science experimentation environment.",
-    status: "Running"
-  },
-  {
-    name: "MLflow",
-    category: "MLOps",
-    description: "Experiment tracking, metrics, artifacts and model lifecycle management.",
-    status: "Running"
-  },
-  {
-    name: "Ollama",
-    category: "AI",
-    description: "Local language-model inference and experimentation.",
-    status: "Running"
-  },
-  {
-    name: "Immich",
-    category: "Storage",
-    description: "Self-hosted phone photo and video backup platform.",
-    status: "Running"
-  },
-  {
-    name: "Nextcloud",
-    category: "Cloud",
-    description: "Personal file sync, sharing and private cloud storage.",
-    status: "Running"
-  },
-  {
-    name: "Grafana",
-    category: "Monitoring",
-    description: "System, Docker and GPU observability dashboards.",
-    status: "Running"
-  },
-  {
-    name: "Prometheus",
-    category: "Monitoring",
-    description: "Time-series metrics collection and monitoring backend.",
-    status: "Running"
-  },
-  {
-    name: "Caddy",
-    category: "Hosting",
-    description: "Reverse proxy and routing layer for hosted applications.",
-    status: "Running"
-  }
-];
-
-const specs = [
-  ["OS", "Ubuntu Server"],
-  ["Compute", "Intel Core i5 · 8 logical CPUs"],
-  ["Memory", "~15 GB RAM"],
-  ["GPU", "NVIDIA GTX 1050 Ti · 4 GB"],
-  ["System Storage", "128 GB SSD"],
-  ["Data Storage", "1 TB HDD"],
-  ["Containers", "Docker + Compose"],
-  ["Observability", "Prometheus + Grafana"]
-];
+import { getEntry } from "astro:content";
+const site = (await getEntry("pages", "site"))!.data;
+const page = (await getEntry("pages", "homelab"))!.data;
+const services = page.services;
+const specs = page.specs;
 ---
 
 <BaseLayout
-  title="Homelab — Abhinav"
+  title={`Homelab — ${site.shortName}`}
   description="My self-hosted infrastructure for machine learning, AI, storage, monitoring and application hosting."
 >
   <section class="lab-hero">
     <div>
-      <span class="eyebrow">SELF-HOSTED INFRASTRUCTURE</span>
+      <span class="eyebrow">{page.eyebrow}</span>
 
       <h1>
-        My private
-        <span>AI & ML platform.</span>
+        {page.headline}
       </h1>
 
       <p>
-        A self-hosted environment built to learn how models, APIs,
-        monitoring, storage and infrastructure work together beyond
-        the notebook.
+        {page.intro}
       </p>
     </div>
 
     <div class="hero-status">
       <span class="pulse"></span>
-      <strong>Homelab operational</strong>
+      <strong>{page.status}</strong>
     </div>
   </section>
 
   <section class="architecture">
     <div class="architecture-title">
       <span class="eyebrow">ARCHITECTURE</span>
-      <h2>From hardware to application.</h2>
+      <h2>{page.architectureTitle}</h2>
     </div>
 
     <div class="architecture-flow">
-      <div class="architecture-node public">
-        <span>01</span>
-        <strong>Clients</strong>
-        <small>Mac · Phone · Browser</small>
-      </div>
-
-      <div class="line">→</div>
-
-      <div class="architecture-node">
-        <span>02</span>
-        <strong>Caddy</strong>
-        <small>Reverse Proxy</small>
-      </div>
-
-      <div class="line">→</div>
-
-      <div class="architecture-node main">
-        <span>03</span>
-        <strong>Docker</strong>
-        <small>Application Platform</small>
-      </div>
-
-      <div class="line">→</div>
-
-      <div class="architecture-node">
-        <span>04</span>
-        <strong>Ubuntu</strong>
-        <small>Host OS</small>
-      </div>
-
-      <div class="line">→</div>
-
-      <div class="architecture-node">
-        <span>05</span>
-        <strong>Predator</strong>
-        <small>Physical Server</small>
-      </div>
+      {page.architecture.map((node, index) => (
+        <>
+          {index > 0 && <div class="line">→</div>}
+          <div class:list={["architecture-node", { public: index === 0, main: index === 2 }]}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <strong>{node.name}</strong>
+            <small>{node.detail}</small>
+          </div>
+        </>
+      ))}
     </div>
 
     <div class="service-row">
-      <span>Jupyter</span>
-      <span>MLflow</span>
-      <span>Ollama</span>
-      <span>Immich</span>
-      <span>Nextcloud</span>
-      <span>Grafana</span>
+      {page.featuredServices.map((service) => <span>{service}</span>)}
     </div>
   </section>
 
@@ -150,7 +58,7 @@ const specs = [
     <div class="section-heading">
       <div>
         <span class="eyebrow">SERVICES</span>
-        <h2>What runs on it.</h2>
+        <h2>{page.servicesTitle}</h2>
       </div>
 
       <span class="service-count">{services.length} services shown</span>
@@ -180,20 +88,19 @@ const specs = [
   <section class="spec-section">
     <div>
       <span class="eyebrow">HARDWARE</span>
-      <h2>Small machine.<br />Serious playground.</h2>
+      <h2>{page.hardwareTitle}</h2>
 
       <p>
-        The constraint is part of the point. Limited hardware forces
-        deliberate decisions around services, resource usage and architecture.
+        {page.hardwareText}
       </p>
     </div>
 
     <div class="spec-list">
       {
-        specs.map(([name, value]) => (
+        specs.map((spec) => (
           <div>
-            <span>{name}</span>
-            <strong>{value}</strong>
+            <span>{spec.name}</span>
+            <strong>{spec.value}</strong>
           </div>
         ))
       }
@@ -201,29 +108,13 @@ const specs = [
   </section>
 
   <section class="principles">
-    <article>
-      <span>01</span>
-      <h3>Reproducible</h3>
-      <p>Services are containerized and configuration is treated as infrastructure.</p>
-    </article>
-
-    <article>
-      <span>02</span>
-      <h3>Observable</h3>
-      <p>CPU, memory, disks, Docker containers and GPU metrics are monitored.</p>
-    </article>
-
-    <article>
-      <span>03</span>
-      <h3>Useful</h3>
-      <p>The platform runs actual workloads instead of existing only as a demo environment.</p>
-    </article>
-
-    <article>
-      <span>04</span>
-      <h3>Expandable</h3>
-      <p>Designed to grow into hosting, AI workloads and home automation over time.</p>
-    </article>
+    {page.principles.map((item, index) => (
+      <article>
+        <span>{String(index + 1).padStart(2, "0")}</span>
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
+      </article>
+    ))}
   </section>
 </BaseLayout>
 
