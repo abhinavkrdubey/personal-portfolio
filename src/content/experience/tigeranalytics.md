@@ -1,7 +1,7 @@
 ---
-period: 2024 - Current
-role: Senior Data Scientist
-company: Circana
+period: 2022 - 2022
+role: Data Science - Analyst
+company: Tiger Analytics
 summary: Machine learning, AI automation, data products, experimentation and production ML systems.
-order: 1
+order: 3
 ---
