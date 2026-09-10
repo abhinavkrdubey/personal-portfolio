@@ -1,13 +1,13 @@
 ---
-eyebrow: Data Science · Machine Learning · AI
-intro: I build data products and machine-learning systems that turn ambiguous business problems into measurable outcomes — from experimentation and statistical modeling to APIs, deployment and monitoring.
+eyebrow: Machine Learning · NLP · GenAI
+intro: I have 4+ years of experience building ML, NLP and GenAI solutions across CPG, retail and e-commerce. I turn ambiguous business problems into scalable automation and analytics systems that improve accuracy, accelerate workflows and support faster decisions.
 projectsLabel: Selected Work
 projectsTitle: Case studies
 experienceLabel: Experience
 experienceTitle: Building systems, not just models.
-experienceRole: Senior Data Scientist
-experienceCompany: Circana
-experienceText: Machine learning, automation, AI systems, experimentation and production analytics.
+experienceRole: Senior Manager, Client Sales & Insights
+experienceCompany: Circana India Pvt Ltd
+experienceText: Building NLP, ML and GenAI products for CPG and retail innovation analytics, while guiding cross-functional implementation.
 stackLabel: Technical Focus
 stackTitle: A stack built around solving problems.
 homelabLabel: Self-Hosted Infrastructure

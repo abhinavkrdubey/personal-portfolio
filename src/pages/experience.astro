@@ -1,9 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 const site = (await getEntry("pages", "site"))!.data;
 const page = (await getEntry("pages", "experience"))!.data;
-const experience = (await getCollection("experience")).sort((a, b) => a.data.order - b.data.order);
+const entries = (await getCollection("experience")).sort((a, b) => a.data.order - b.data.order);
+const experience = await Promise.all(
+  entries.map(async (entry) => ({ entry, Content: (await render(entry)).Content }))
+);
 ---
 
 <BaseLayout title={`Experience — ${site.shortName}`}>
@@ -20,15 +23,22 @@ const experience = (await getCollection("experience")).sort((a, b) => a.data.ord
 
   <section class="experience-page">
 
-    {experience.map((item) => (
+    {experience.map(({ entry, Content }) => (
       <article>
-        <span>{item.data.period}</span>
-        <h2>{item.data.role}</h2>
-        <h3>{item.data.company}</h3>
-        <p>{item.data.summary}</p>
+        <span>{entry.data.period}</span>
+        <h2>{entry.data.role}</h2>
+        <h3>{entry.data.company} · {entry.data.location}</h3>
+        <p>{entry.data.summary}</p>
+        <div class="experience-details"><Content /></div>
       </article>
     ))}
 
   </section>
 
 </BaseLayout>
+
+<style>
+  .experience-details { max-width: 760px; margin-top: 18px; }
+  .experience-details :global(ul) { margin: 0; padding-left: 20px; }
+  .experience-details :global(li) { margin: 8px 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+</style>

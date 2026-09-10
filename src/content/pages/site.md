@@ -1,8 +1,8 @@
 ---
 name: Abhinav Kumar Dubey
 shortName: Abhinav
-role: Senior Data Scientist
-specialty: ML & AI Systems
+role: Senior Manager, Client Sales & Insights
+specialty: ML, NLP & GenAI Solutions
 location: India
 email: abhinavkumardubey9481@gmail.com
 github: https://github.com/abhinavkrdubey

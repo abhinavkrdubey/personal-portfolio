@@ -1,7 +1,7 @@
 ---
 eyebrow: About
 headline: I like solving the hard part before the model.
-intro: I'm Abhinav, a Senior Data Scientist working across machine learning, statistics, automation and AI systems.
+intro: I'm Abhinav, a Senior Manager in Client Sales & Insights with 4+ years of experience building machine-learning, NLP, GenAI and analytics solutions across CPG, retail and e-commerce.
 approachLabel: My Approach
 approachLead: The part of data science I enjoy most isn't choosing an algorithm. It's figuring out what the problem actually is.
 approach:
