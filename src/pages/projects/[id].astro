@@ -13,6 +13,10 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content, headings } = await render(project);
 const site = (await getEntry("pages", "site"))!.data;
+const blogs = await getCollection("blogs", ({ data }) => !data.draft);
+const relatedBlogs = blogs.filter((blog) =>
+  project.data.relatedBlogs.includes(blog.id) || blog.data.projects.includes(project.id)
+);
 ---
 
 <BaseLayout title={`${project.data.title} — ${site.shortName}`} description={project.data.description}>
@@ -36,6 +40,13 @@ const site = (await getEntry("pages", "site"))!.data;
     <div class="project-body">
       <Content />
     </div>
+
+    {relatedBlogs.length > 0 && (
+      <aside class="related">
+        <span>RELATED WRITING</span>
+        {relatedBlogs.map((blog) => <a href={`/blogs/${blog.id}/`}>{blog.data.title} →</a>)}
+      </aside>
+    )}
   </article>
 </BaseLayout>
 
@@ -58,6 +69,9 @@ const site = (await getEntry("pages", "site"))!.data;
   .project-body :global(ul), .project-body :global(ol) { padding-left: 24px; }
   .project-body :global(a) { color: var(--blue); text-decoration: underline; }
   .project-body :global(img) { max-width: 100%; height: auto; border-radius: 12px; }
+  .related { display: grid; gap: 12px; max-width: 760px; margin: 42px auto 0; padding: 28px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+  .related > span { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+  .related a { color: var(--blue); font-size: 18px; font-weight: 700; }
   @media (max-width: 720px) {
     .case-study { width: min(100% - 32px, 960px); padding-top: 38px; }
     .case-hero { padding: 48px 0; }

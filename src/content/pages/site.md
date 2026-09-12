@@ -11,6 +11,7 @@ resume: /resume.pdf
 nav:
   - { name: Home, href: / }
   - { name: Projects, href: /projects/ }
+  - { name: Blogs, href: /blogs/ }
   - { name: Experience, href: /experience/ }
   - { name: Stack, href: /stack/ }
   - { name: Homelab, href: /homelab/ }

@@ -1,0 +1,47 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const site = (await getEntry("pages", "site"))!.data;
+const page = (await getEntry("pages", "blogs"))!.data;
+const blogs = (await getCollection("blogs", ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+const isoDate = (date: Date) => date.toISOString().slice(0, 10);
+const displayDate = (date: Date) => date.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<BaseLayout title={`Blogs — ${site.shortName}`} description={page.intro}>
+  <section class="page-header">
+    <span class="eyebrow">{page.eyebrow}</span>
+    <h1>{page.title}</h1>
+    <p>{page.intro}</p>
+  </section>
+
+  <section class="blog-grid">
+    {blogs.length > 0 ? blogs.map((blog) => (
+      <a class="blog-card" href={`/blogs/${blog.id}/`}>
+        <div class="blog-meta">
+          <time datetime={isoDate(blog.data.published)}>{displayDate(blog.data.published)}</time>
+          <span>{blog.data.tags.join(" · ")}</span>
+        </div>
+        <h2>{blog.data.title}</h2>
+        <p>{blog.data.description}</p>
+        <span class="read-link">Read article →</span>
+      </a>
+    )) : (
+      <div class="empty-state"><h2>{page.emptyTitle}</h2><p>{page.emptyText}</p></div>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-grid { width: min(980px, calc(100% - 48px)); margin: 0 auto 100px; display: grid; gap: 16px; }
+  .blog-card { padding: 30px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); transition: .2s ease; }
+  .blog-card:hover { transform: translateY(-3px); border-color: var(--blue); box-shadow: var(--shadow); }
+  .blog-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--blue); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+  .blog-card h2 { max-width: 760px; margin: 22px 0 10px; font-family: Georgia, serif; font-size: clamp(28px, 4vw, 42px); line-height: 1.12; font-weight: 500; }
+  .blog-card p, .empty-state p { max-width: 700px; color: var(--muted); font-size: 16px; line-height: 1.7; }
+  .read-link { display: block; margin-top: 24px; color: var(--blue); font-size: 14px; font-weight: 700; }
+  .empty-state { padding: 48px 30px; border: 1px dashed var(--line); border-radius: 12px; }
+  @media (max-width: 720px) { .blog-grid { width: min(100% - 32px, 980px); } .blog-card { padding: 22px; } }
+</style>

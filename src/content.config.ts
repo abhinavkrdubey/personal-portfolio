@@ -11,7 +11,21 @@ const projects = defineCollection({
     tags: z.array(z.string()),
     order: z.number().default(99),
     featured: z.boolean().default(true),
+    relatedBlogs: z.array(z.string()).default([]),
     metrics: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
+  }),
+});
+
+const blogs = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/blogs" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    published: z.coerce.date(),
+    tags: z.array(z.string()).default([]),
+    projects: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+    order: z.number().default(99),
   }),
 });
 
@@ -24,4 +38,4 @@ const experience = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/experience" }),
 });
 
-export const collections = { projects, pages, experience };
+export const collections = { projects, blogs, pages, experience };

@@ -17,7 +17,8 @@ src/content/
 │   ├── projects.md
 │   └── stack.md
 ├── experience/         # one Markdown file per job
-└── projects/           # one Markdown file per project
+├── projects/           # one Markdown file per project
+└── blogs/              # one Markdown file per blog post
 ```
 
 Edit and save these files while `npm run dev` is running; the browser refreshes
@@ -28,6 +29,29 @@ design templates and normally do not need to be edited.
 
 Copy an existing file in `src/content/experience/`, give it a new filename, and
 edit its fields. Jobs are sorted using the `order` field.
+
+### Add a blog post
+
+```bash
+cp templates/new-blog.md src/content/blogs/my-new-post.md
+```
+
+The filename becomes the URL: `my-new-post.md` creates `/blogs/my-new-post/`.
+Set `draft: true` to hide a post. Link a blog to projects using their filenames
+without `.md`:
+
+```yaml
+projects: [dcs-automation, homelab-platform]
+```
+
+Alternatively, link a project to blogs in the project's frontmatter:
+
+```yaml
+relatedBlogs: [automating-dcs-classification]
+```
+
+You only need to define the relationship on one side; the site automatically
+shows the reverse link too.
 
 ### Add a new project
 
